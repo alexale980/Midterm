@@ -7,30 +7,46 @@ package arithmetic;
 
 
 import java.util.Scanner;
-import static java.time.Clock.system;
 
 /** This class calls the method to perform 
  * arithmetic operations based on user input
  * execute the code check the output
- * @author sivagamasrinivasan
+ * @author Kshitij Ale
  * 
  */
-public class Arithmetic 
-{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) 
-    {
-       
-        ArithmeticBase r= new ArithmeticBase();
-        Scanner in= new Scanner(System.in);
-        int n= in.nextInt();
-        int m= in.nextInt();
-        double result = r.calculate(m,n);
-        System.out.println("result :" +result); 
-    
+public class Arithmetic {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the first number: ");
+        double num1 = scanner.nextDouble();
+
+        System.out.print("Enter the second number: ");
+        double num2 = scanner.nextDouble();
+
+        // Consume the newline character
+        scanner.nextLine();
+
+        System.out.print("Enter the arithmetic operation (PLUS, MINUS, TIMES, DIVIDE): ");
+        String operationStr = scanner.nextLine().toUpperCase();
+
+        try {
+            // Convert the input String to the Operation enum
+            Operation operation = Operation.valueOf(operationStr);
+
+            // Create an instance of ArithmeticBase
+            ArithmeticBase arithmeticBase = new ArithmeticBase();
+            arithmeticBase.setX(num1);
+            arithmeticBase.setY(num2);
+
+            
+            double result = arithmeticBase.calculate(operation);
+
+            // Print the result
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid operation!");
+        }
     }
 }
-
